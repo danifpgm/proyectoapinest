@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Cosa } from 'src/modulo1/interfaces/cosa.interface';
+import { crearCosaDto } from '../../dto/crear-cosa.dto';
 
 @Injectable()
 export class ServicioService {
@@ -25,5 +26,18 @@ export class ServicioService {
             throw new NotFoundException(`Cosa con id '${ id }' no se encuentra`);
         }
         return cosa;
+    }
+
+    crearCosa(cosaDto: crearCosaDto) {
+        const cosa: Cosa = {
+            ...cosaDto
+        }
+        this.cosas.push(cosa);
+        return {
+            status: 200,
+            ok: true,
+            msg: `Cosa '${cosa.nombre}' insertada`
+        }
+
     }
 }

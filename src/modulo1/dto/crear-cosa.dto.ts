@@ -1,9 +1,9 @@
-import { IsString, IsDecimal } from "class-validator";
+import { IsString, IsNumber } from "class-validator";
 
 export class crearCosaDto {
-    @IsDecimal( { message: `El campo id debe ser un numero` } )
+    @IsNumber()
     readonly id: number;
     
-    @IsString( { message: `El campo id debe ser un tecto corto` } )
+    @IsString( { message: `El campo id debe ser un texto corto` } )
     readonly nombre: string;
 }

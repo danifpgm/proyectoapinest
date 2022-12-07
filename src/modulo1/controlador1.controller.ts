@@ -21,12 +21,7 @@ export class Controlador1Controller {
   @Post('nuevo')
   @UsePipes( ValidationPipe )
   crear( @Body() dto: crearCosaDto ){
-      return {
-          status: 200,
-          ok: true,
-          datos: dto,
-          msg: 'Cosa creada'
-      }
+      return this.servicio.crearCosa(dto);
   }
 
 
