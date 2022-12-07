@@ -1,0 +1,7 @@
+POST http://localhost:3000/controlador1/nuevo
+Content-Type: application/json
+
+{
+    "id": 5,
+    "nombre": "cosa5"
+}
