@@ -7,5 +7,6 @@ Content-Type: application/json
     "descripcion": "descripcion",
     "stock": 5,
     "propiedades": ["propiedad1", "propiedad2"],
-    "tipo": "objeto1"
+    "tipo": "objeto1",
+    "imagenes":["url1", "url2"]
 }

@@ -30,4 +30,9 @@ export class CrearProductoDto {
     
     @IsIn(['objeto1', 'objeto2', 'objeto3', 'objeto4'])
     tipo?: string;
+
+    @IsString({ each: true })
+    @IsArray()
+    @IsOptional()
+    imagenes?: string[]
 }
