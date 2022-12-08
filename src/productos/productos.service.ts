@@ -1,9 +1,12 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CrearProductoDto } from './dto/create-producto.dto';
-import { UpdateProductoDto } from './dto/update-producto.dto';
+import { CrearProductoDto } from './dto/crear-producto.dto';
+import { ActualizarProductoDto } from './dto/actualizar-producto.dto';
 import { Producto } from './entities/producto.entity';
+import { PaginacionDto } from '../comun/dto/paginacion.dto';
+import { validate as isUUID } from 'uuid';
+
 
 @Injectable()
 export class ProductosService {
@@ -17,7 +20,7 @@ export class ProductosService {
     try {
       const producto = this.productoRepositorio.create(crearProductoDto);
       await this.productoRepositorio.save(producto);
-      return producto;
+      return 'Producto ' + producto.nombre + ' creado con exito'
     } catch (error) {
       this.manejarExcepcionesBD(error)
     }
@@ -31,19 +34,49 @@ export class ProductosService {
     throw new InternalServerErrorException('Error inesperado, comrpueba los errores')
   }
 
-  findAll() {
-    return `This action returns all productos`;
+  async listarTodos(paginacionDto: PaginacionDto) {
+    const { limit , offset } = paginacionDto;
+    return this.productoRepositorio.find({
+      take: limit,
+      skip: offset
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} producto`;
+  async listarPorId(termino: string) {
+    let producto: Producto;
+    if ( isUUID(termino) ) {
+      producto = await this.productoRepositorio.findOneBy( { id: termino });
+    } else {
+      const queryBuilder = this.productoRepositorio.createQueryBuilder();
+      producto = await queryBuilder
+        .where(`UPPER(nombre) = :nombre o UPPER(slug) = :slug`, {
+          nombre: termino.toUpperCase(),
+          slug: termino.toUpperCase()
+        }).getOne();
+    }
+    if (!producto){
+    throw new NotFoundException(`Producto ${producto.nombre} no encontrado`)
+    }
+    return producto
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto) {
-    return `This action updates a #${id} producto`;
+  async actualizar(id: string, actualizarProductoDto: ActualizarProductoDto) {
+    const producto = await this.productoRepositorio.preload({
+      id: id,
+      ...actualizarProductoDto,
+    });
+    if(!producto) throw new NotFoundException(`Producto ${producto.nombre} no encontrado`);
+    try {
+      await this.productoRepositorio.save(producto);
+      return producto
+    } catch (error) {
+      this.manejarExcepcionesBD(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} producto`;
+  async borrar(id: string) {
+    const producto = await this.listarPorId(id);
+    await this.productoRepositorio.remove(producto);
+    return 'Producto ' + producto.nombre + ' borrado';
   }
 }

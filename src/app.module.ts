@@ -3,8 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Modulo1Module } from './modulo1/modulo1.module';
 import { ProductosModule } from './productos/productos.module';
+import { ComunModule } from './comun/comun.module';
 
 @Module({
   imports: [
@@ -19,8 +19,8 @@ import { ProductosModule } from './productos/productos.module';
       autoLoadEntities: true,
       synchronize: true
     }),
-    Modulo1Module,
-    ProductosModule],
+    ProductosModule,
+    ComunModule],
   controllers: [AppController],
   providers: [AppService],
 })

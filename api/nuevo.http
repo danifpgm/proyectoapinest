@@ -1,7 +1,11 @@
-POST http://localhost:3000/api/controlador1/nuevo
+POST http://localhost:3000/api/productos
 Content-Type: application/json
 
 {
-    "id": 5,
-    "nombre": "cosa5"
+    "nombre": "nombre",
+    "precio": 5,
+    "descripcion": "descripcion",
+    "stock": 5,
+    "propiedades": ["propiedad1", "propiedad2"],
+    "tipo": "objeto1"
 }

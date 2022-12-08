@@ -1,9 +1,9 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Producto {
-    @PrimaryGeneratedColumn('increment')
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column('text', {
         unique: true
@@ -49,5 +49,16 @@ export class Producto {
         .toLowerCase()
         .replaceAll(' ', '_')
         .replaceAll("'", '')
+    }
+
+    @BeforeUpdate()
+    comprobarActualizacionSlug(){
+        if (!this.slug){
+            this.slug = this.nombre
+        }
+        this.slug = this.slug 
+                       .toLowerCase()
+                       .replaceAll(' ', '_')
+                       .replaceAll("'", '')
     }
 }

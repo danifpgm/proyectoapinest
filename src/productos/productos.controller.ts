@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, Query } from '@nestjs/common';
 import { ProductosService } from './productos.service';
-import { CrearProductoDto } from './dto/create-producto.dto';
-import { UpdateProductoDto } from './dto/update-producto.dto';
+import { CrearProductoDto } from './dto/crear-producto.dto';
+import { ActualizarProductoDto } from './dto/actualizar-producto.dto';
+import { PaginacionDto } from '../comun/dto/paginacion.dto';
 
 @Controller('productos')
 export class ProductosController {
@@ -13,22 +14,23 @@ export class ProductosController {
   }
 
   @Get()
-  findAll() {
-    return this.productosService.findAll();
+  listarTodos( @Query() paginacionDto: PaginacionDto) {
+    return this.productosService.listarTodos(paginacionDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productosService.findOne(+id);
+  @Get(':termino')
+  listarPorId(@Param('termino') termino: string) {
+    return this.productosService.listarPorId(termino);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductoDto: UpdateProductoDto) {
-    return this.productosService.update(+id, updateProductoDto);
+  async actualizar(@Param('id', ParseUUIDPipe) id: string,
+  @Body() actualizarProductoDto: ActualizarProductoDto) {
+    return await this.productosService.actualizar(id, actualizarProductoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productosService.remove(+id);
+  borrar(@Param('id', ParseUUIDPipe) id: string) {
+    return this.productosService.borrar(id);
   }
 }

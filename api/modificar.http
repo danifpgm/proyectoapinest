@@ -1,0 +1,6 @@
+PATCH http://localhost:3000/api/productos/6b1d635d-b2fe-449a-ae91-67a9e9691b86
+Content-Type: application/json
+
+{
+    "stock": 7
+}
