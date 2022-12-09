@@ -15,12 +15,12 @@ export class Usuario {
    @Column('text')
    nombreCompleto: string;
  
-   @Column('bool', { unique: true })
+   @Column('bool')
    esActivo: boolean;
  
    @Column('text', {
        array: true,
-       default: ['user']
+       default: ['usuario']
    })
    roles: string[]
 }

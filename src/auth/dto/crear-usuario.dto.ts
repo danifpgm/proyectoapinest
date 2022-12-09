@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { IsArray, IsBoolean, IsEmail, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
 export class CrearUsuarioDto {
     
@@ -18,4 +18,13 @@ export class CrearUsuarioDto {
     @IsString()
     @MinLength(1)
     nombreCompleto:string;
+
+    @IsBoolean()
+    esActivo: boolean;
+
+    @IsString({ each: true })
+    @IsArray()
+    @IsOptional()
+    roles?: string[]
+
 }

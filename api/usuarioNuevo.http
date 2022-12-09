@@ -4,5 +4,6 @@ Content-Type: application/json
 {
     "correo": "correo@correo.correo",
     "passwd": "0Passwd",
-    "nombreCompleto": "nombreCompleto"
+    "nombreCompleto": "nombreCompleto",
+    "esActivo": true
 }
