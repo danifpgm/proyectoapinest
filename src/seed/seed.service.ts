@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ProductosServicio } from 'src/productos/productos.service';
+import * as DatosIniciales  from '../seed/datos/csv.json';
+
 
 @Injectable()
 export class SeedServicio {
