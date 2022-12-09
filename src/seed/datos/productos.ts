@@ -1,11 +1,11 @@
 import { ProductosSeed } from "../interfaces/ProductosSeed.interface";
 
 interface DatosSeed {
-    products: ProductosSeed[];
+    productos: ProductosSeed[];
 }
 
-export const initialData: DatosSeed = {
-    products: [
+export const DatosIniciales: DatosSeed = {
+    productos: [
         {
             nombre: "objeto1",
             precio: 50,

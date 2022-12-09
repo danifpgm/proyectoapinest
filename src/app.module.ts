@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
 import { ComunModule } from './comun/comun.module';
 import { SeedModule } from './seed/seed.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { SeedModule } from './seed/seed.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
+      port: +process.env.DB_PUERTO,
       database: process.env.DB_NOMBRE,
       username: process.env.DB_NOMBREUSU,
       password: process.env.DB_PASSWD,
@@ -22,7 +23,8 @@ import { SeedModule } from './seed/seed.module';
     }),
     ProductosModule,
     ComunModule,
-    SeedModule
+    SeedModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
