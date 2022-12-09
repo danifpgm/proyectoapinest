@@ -11,7 +11,7 @@ import { Console } from 'console';
 
 
 @Injectable()
-export class ProductosService {
+export class ProductosServicio {
   private readonly logger = new Logger('ProductosService');
   constructor(
     @InjectRepository(Producto)
@@ -55,24 +55,24 @@ export class ProductosService {
   async listarPorId(termino: string) {
     let producto: Producto;
     if ( isUUID(termino) ) {
-      producto = await this.productoRepositorio.findOneBy( { id: termino });
+      producto = await this.productoRepositorio.findOne({ where: { id: termino}, relations: { imagenes: true }});
     } else {
       const queryBuilder = this.productoRepositorio.createQueryBuilder('producto');
       producto = await queryBuilder
-        .where(`UPPER(nombre) = :nombre o UPPER(slug) = :slug`, {
+        .where(`UPPER(nombre) = :nombre or UPPER(slug) = :slug`, {
           nombre: termino.toUpperCase(),
           slug: termino.toUpperCase()
         })
         .leftJoinAndSelect('producto.imagenes','productoImagenes')
         .getOne();
     }
-    if (!producto){
+    if (!producto) {
     throw new NotFoundException(`Producto ${producto.nombre} no encontrado`)
     }
     return producto
   }
 
-  async findOnePlain( termino: string ){
+  async listarPorIdPlain( termino: string ){
     const { imagenes=[], ...rest } = await this.listarPorId( termino );
     return {
       ...rest,
@@ -103,7 +103,7 @@ export class ProductosService {
       await queryRunner.manager.save(producto);
       await queryRunner.commitTransaction();
       await queryRunner.release();
-      return this.findOnePlain(id);
+      return this.listarPorIdPlain(id);
     } catch (error) {
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
@@ -115,6 +115,18 @@ export class ProductosService {
     const producto = await this.listarPorId(id);
     await this.productoRepositorio.remove(producto);
     return 'Producto ' + producto.nombre + ' borrado';
+  }
+
+  async borrarTodosElementos() {
+    const query = this.productoRepositorio.createQueryBuilder('product');
+    try {
+      return await query
+              .delete()
+              .where({})
+              .execute()
+    } catch (error) {
+      this.manejarExcepcionesBD( error )
+    }
   }
 
   private manejarExcepcionesBD( error: any) {

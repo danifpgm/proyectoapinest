@@ -1,4 +1,4 @@
-PATCH http://localhost:3000/api/productos/6b1d635d-b2fe-449a-ae91-67a9e9691b86
+PATCH http://localhost:3000/api/productos/56f2abef-b07c-4a58-b9ec-401964315abc
 Content-Type: application/json
 
 {

@@ -42,7 +42,7 @@ export class Producto {
     tipo: string
 
     @OneToMany(
-        () => ProductoImagen, //regresa un PI
+        () => ProductoImagen,
         (productoImagen) => productoImagen.producto,
         { cascade: true, eager: true }
     )
