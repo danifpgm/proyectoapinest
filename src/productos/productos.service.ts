@@ -59,9 +59,9 @@ export class ProductosServicio {
     } else {
       const queryBuilder = this.productoRepositorio.createQueryBuilder('producto');
       producto = await queryBuilder
-        .where(`UPPER(nombre) = :nombre or UPPER(slug) = :slug`, {
+        .where(`UPPER(nombre) = :nombre or slug = :slug`, {
           nombre: termino.toUpperCase(),
-          slug: termino.toUpperCase()
+          slug: termino.toLocaleLowerCase()
         })
         .leftJoinAndSelect('producto.imagenes','productoImagenes')
         .getOne();
