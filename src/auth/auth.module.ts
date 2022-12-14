@@ -19,7 +19,6 @@ import { Usuario } from './entities/usuario.entity';
       imports: [ ConfigModule ],
       inject: [ ConfigService ],
       useFactory: ( configServicio: ConfigService ) => {
-        console.log ('JWT Secret --> ', configServicio.get('JWT_SECRET'));
         return {
           secret: configServicio.get('JWT_SECRET'),
           signOptions: {
