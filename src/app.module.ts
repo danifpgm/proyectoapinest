@@ -7,6 +7,8 @@ import { ProductosModule } from './productos/productos.module';
 import { ComunModule } from './comun/comun.module';
 import { SeedModule } from './seed/seed.module';
 import { AuthModule } from './auth/auth.module';
+import { ClientesModule } from './clientes/clientes.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { AuthModule } from './auth/auth.module';
     ProductosModule,
     ComunModule,
     SeedModule,
-    AuthModule
+    AuthModule,
+    ClientesModule,
+    UsuariosModule
   ],
   controllers: [AppController],
   providers: [AppService],

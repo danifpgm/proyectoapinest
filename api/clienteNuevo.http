@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+    "nombre": "nombreo",
+    "apellidos": "apelidos"
+}

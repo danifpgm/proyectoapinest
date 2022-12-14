@@ -1,0 +1,2 @@
+GET http://localhost:3000/api/clientes/3f925bc7-1816-46b2-aa01-ea4515a30577
+Content-Type: application/json

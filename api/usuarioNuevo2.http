@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/usuarios2
+Content-Type: application/json
+
+{
+    "email": "correo@correo.correo",
+    "password": "0Passwd",
+    "idCliente": "3f925bc7-1816-46b2-aa01-ea4515a30577"
+}
