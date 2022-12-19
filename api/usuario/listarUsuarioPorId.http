@@ -1,0 +1,2 @@
+GET http://localhost:3000/api/usuarios/04c764b4-5d4f-4dc9-acff-7420e053ba7c
+Content-Type: application/json

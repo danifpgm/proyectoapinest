@@ -3,12 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductosModule } from './productos/productos.module';
-import { ComunModule } from './comun/comun.module';
+import { ComunModule } from './modulos/comun/comun.module';
 import { SeedModule } from './seed/seed.module';
-import { AuthModule } from './auth/auth.module';
-import { ClientesModule } from './clientes/clientes.module';
-import { UsuariosModule } from './usuarios/usuarios.module';
+import { AuthModule } from './modulos/auth/auth.module';
+import { BrokerModule } from './modulos/broker/broker.module';
+import { CriptoModule } from './modulos/cripto/cripto.module';
+import { NftModule } from './modulos/nft/nft.module';
+import { clear } from 'console';
 
 @Module({
   imports: [
@@ -23,12 +24,12 @@ import { UsuariosModule } from './usuarios/usuarios.module';
       autoLoadEntities: true,
       synchronize: true
     }),
-    ProductosModule,
     ComunModule,
     SeedModule,
     AuthModule,
-    ClientesModule,
-    UsuariosModule
+    BrokerModule,
+    CriptoModule,
+    NftModule
   ],
   controllers: [AppController],
   providers: [AppService],

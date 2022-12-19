@@ -4,9 +4,14 @@ import { SeedServicio } from './seed.service';
 export class SeedController {
   constructor(private readonly seedServicio: SeedServicio) {}
 
-  @Delete()
+  @Post()
   ejecutarSeed() {
     return this.seedServicio.ejecutarSeed();
+  }
+  
+  @Delete()
+  borrar() {
+    return this.seedServicio.borrarTodosElementos();
   }
 
 }

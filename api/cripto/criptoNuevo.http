@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/cripto
+Content-Type: application/json
+
+{
+    "nombre": "cripto",
+    "precio": 5
+}

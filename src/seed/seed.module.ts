@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { SeedServicio } from './seed.service';
 import { SeedController } from './seed.controller';
-import { ProductosModule } from 'src/productos/productos.module';
+import { CriptoModule } from 'src/modulos/cripto/cripto.module';
 
 @Module({
   controllers: [SeedController],
   providers: [SeedServicio],
-  imports: [ProductosModule]
+  imports: [CriptoModule]
 })
 export class SeedModule {}
