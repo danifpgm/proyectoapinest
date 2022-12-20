@@ -26,16 +26,22 @@ export class BrokerService {
     return this.brokerRepositorio.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} broker`;
+  findOne(idBroker: string) {
+    return this.brokerRepositorio.findOne({
+      where: { 
+        id: idBroker
+      },
+    });
   }
 
   update(id: number, updateBrokerDto: UpdateBrokerDto) {
     return `This action updates a #${id} broker`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} broker`;
+  async remove(id: string) {
+    const broker = await this.findOne(id);
+    await this.brokerRepositorio.remove(broker);
+    return `El nft ${broker.nombre} ha sido borrado`;
   }
 
   private manejarExcepcionesBD (error: any): never{

@@ -24,19 +24,25 @@ export class CriptoService {
   }
 
   findAll() {
-    return `This action returns all cripto`;
+    return this.criptoRepositorio.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cripto`;
+  findOne(idCripto: string) {
+    return this.criptoRepositorio.findOne({
+      where: { 
+        id: idCripto
+      },
+    });
   }
 
   update(id: number, updateCriptoDto: UpdateCriptoDto) {
     return `This action updates a #${id} cripto`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cripto`;
+  async remove(id: string) {
+    const cripto = await this.findOne(id);
+    await this.criptoRepositorio.remove(cripto);
+    return `El nft ${cripto.nombre} ha sido borrado`;
   }
 
   private manejarExcepcionesBD (error: any): never{

@@ -20,7 +20,8 @@ export class CrearUsuarioDto {
     nombreCompleto:string;
 
     @IsBoolean()
-    esActivo: boolean;
+    @IsOptional()
+    esActivo?: boolean;
 
     @IsString({ each: true })
     @IsArray()

@@ -1,0 +1,2 @@
+GET http://localhost:3000/api/cripto/2e05b29e-1c68-44dc-9495-3b2163a8d8eb
+Content-Type: application/json

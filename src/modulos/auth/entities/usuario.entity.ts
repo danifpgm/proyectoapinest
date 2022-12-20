@@ -1,25 +1,24 @@
 import { Broker } from "src/modulos/broker/entities/broker.entity";
 import { Cripto } from "src/modulos/cripto/entities/cripto.entity";
 import { Nft } from "src/modulos/nft/entities/nft.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('usuarios')
-@Unique(["correo"]) 
+@Entity('usuarios') 
 export class Usuario {
 
     @PrimaryGeneratedColumn('uuid')
     id:string;
 
-    @Column('text')
+    @Column('text', { select: false })
     passwd: string;
 
-    @Column('text')
+    @Column('text', { unique: true })
     correo: string;
 
     @Column('text')
     nombreCompleto: string;
 
-    @Column('bool')
+    @Column('bool', { default: true })
     esActivo: boolean;
 
     @Column('text', {

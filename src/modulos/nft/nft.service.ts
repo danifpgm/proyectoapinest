@@ -34,15 +34,21 @@ export class NftService {
     return this.nftRepositorio.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} nft`;
+  findOne(idNft: string) {
+    return this.nftRepositorio.findOne({
+      where: { 
+        id: idNft
+      },
+    });
   }
 
   update(id: number, updateNftDto: UpdateNftDto) {
     return `This action updates a #${id} nft`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} nft`;
+  async remove(id: string) {
+    const nft = await this.findOne(id);
+    await this.nftRepositorio.remove(nft);
+    return `El nft ${nft.nombre} ha sido borrado`;
   }
 }

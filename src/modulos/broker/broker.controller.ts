@@ -19,7 +19,7 @@ export class BrokerController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.brokerService.findOne(+id);
+    return this.brokerService.findOne(id);
   }
 
   @Patch(':id')
@@ -29,6 +29,6 @@ export class BrokerController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.brokerService.remove(+id);
+    return this.brokerService.remove(id);
   }
 }

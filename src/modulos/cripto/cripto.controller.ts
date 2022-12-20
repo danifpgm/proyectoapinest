@@ -19,7 +19,7 @@ export class CriptoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.criptoService.findOne(+id);
+    return this.criptoService.findOne(id);
   }
 
   @Patch(':id')
@@ -29,6 +29,6 @@ export class CriptoController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.criptoService.remove(+id);
+    return this.criptoService.remove(id);
   }
 }

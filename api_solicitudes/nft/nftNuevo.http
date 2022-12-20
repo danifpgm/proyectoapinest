@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/nft
+Content-Type: application/json
+
+{
+    "nombre": "nft3",
+    "img": "img3",
+    "idUsuarioCreador": "6b8cf72e-e9ca-4759-a979-e17718a33044",
+    "idUsuarioDueno": "6b8cf72e-e9ca-4759-a979-e17718a33044"
+}

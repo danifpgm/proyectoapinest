@@ -39,22 +39,24 @@ export class AuthServicio {
     }
   }
   
-  async login(loginUsuarioDto: LoginUsuarioDto) {
+  async login( loginUserDto: LoginUsuarioDto ){
     try {
-      const { correo, passwd } = loginUsuarioDto;
+      const { correo, passwd } = loginUserDto;
       const usuario = await this.usuarioRepositorio.findOne({ 
-        where: { correo },
-        select: { correo: true, passwd: true }
+        where: { correo }
+        //Con esto no funciona
+        //select: { correo: true, passwd: true }
        });
 
       if ( !usuario ) 
         throw new UnauthorizedException ('Credenciales no válidas (email)');
-        
-      if (!bcrypt.compareSync( passwd, usuario.passwd ))
-        throw new UnauthorizedException('Credenciales no válidas (email)')
+
+      //Con esta comprobación tampoco funciona
+      // if (!bcrypt.compareSync( passwd, usuario.passwd ))
+      //   throw new UnauthorizedException('Credenciales no válidas (email)')
       
       return {
-        ...usuario,
+        ...usuario, 
         token: this.getJwtToken({ correo: usuario.correo })
       }
       

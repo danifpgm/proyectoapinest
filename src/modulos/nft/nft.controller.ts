@@ -19,7 +19,7 @@ export class NftController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.nftService.findOne(+id);
+    return this.nftService.findOne(id);
   }
 
   @Patch(':id')
@@ -29,6 +29,6 @@ export class NftController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.nftService.remove(+id);
+    return this.nftService.remove(id);
   }
 }
