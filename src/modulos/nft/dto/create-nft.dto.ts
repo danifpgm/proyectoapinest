@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MinLength } from "class-validator";
+import { IsString, MinLength } from "class-validator";
 
 export class CreateNftDto {
     @IsString()
@@ -15,6 +15,5 @@ export class CreateNftDto {
 
     @IsString()
     @MinLength(1)
-    @IsOptional()
     idUsuarioDueno: string;
 }

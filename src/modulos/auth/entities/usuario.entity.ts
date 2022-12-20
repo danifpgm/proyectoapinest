@@ -1,9 +1,10 @@
 import { Broker } from "src/modulos/broker/entities/broker.entity";
 import { Cripto } from "src/modulos/cripto/entities/cripto.entity";
 import { Nft } from "src/modulos/nft/entities/nft.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity('usuarios')
+@Unique(["correo"]) 
 export class Usuario {
 
     @PrimaryGeneratedColumn('uuid')
@@ -30,7 +31,7 @@ export class Usuario {
     @OneToOne(
     () => Nft,
     (nft) => nft.creaUsuario,
-    { cascade: false }
+    { cascade: true, eager: true }
     )
     creaNft?: Nft;
     

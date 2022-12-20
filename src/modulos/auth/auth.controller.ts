@@ -26,4 +26,9 @@ export class AuthController {
   findOne(@Param('id') id: string) {
     return this.authServicio.findOne(id);
   }
+
+  @Delete(':id')
+  borrar(@Param('id') id: string) {
+    return this.authServicio.remove(id);
+  }
 }

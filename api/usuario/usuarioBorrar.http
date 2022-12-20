@@ -1,0 +1,2 @@
+DELETE http://localhost:3000/api/usuarios/7ddcbc1e-9216-43b6-8f30-ff9e19572aed
+Content-Type: application/json

@@ -1,6 +1,0 @@
-PATCH http://localhost:3000/api/productos/56f2abef-b07c-4a58-b9ec-401964315abc
-Content-Type: application/json
-
-{
-    "stock": 10
-}

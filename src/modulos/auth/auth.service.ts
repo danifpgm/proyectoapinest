@@ -7,6 +7,7 @@ import { Usuario } from './entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 
 
 @Injectable()
@@ -69,9 +70,19 @@ export class AuthServicio {
       },
     });
   }
+  
+  update(id: number, actualizarUsuarioDto: ActualizarUsuarioDto) {
+    return `This action updates a #${id} broker`;
+  }
 
-  findAll() {
+  async findAll() {
     return this.usuarioRepositorio.find({});
+  }
+
+  async remove(id: string) {
+    const usuario = await this.findOne(id);
+    await this.usuarioRepositorio.remove(usuario);
+    return `El usuario ${usuario.nombreCompleto} ha sido borrado`;
   }
 
   private manejarExcepcionesBD (error: any): never{
