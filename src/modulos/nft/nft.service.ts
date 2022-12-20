@@ -22,8 +22,10 @@ export class NftService {
       const usuarioDueno = await this.authServicio.findOne(idUsuarioDueno);
       nft.creaUsuario = usuarioCreador;
       nft.poseeUsuario = usuarioDueno;
+      
       await this.nftRepositorio.save(nft);
-      return `NFT: ${nft.nombre} creado por ${usuarioCreador.nombreCompleto} insertado correctamente. Es propiedad de ${usuarioDueno.nombreCompleto}`
+      // return `NFT: ${nft.nombre} creado por ${usuarioCreador.nombreCompleto} insertado correctamente. Es propiedad de ${usuarioDueno.nombreCompleto}`
+      return nft;
     } catch(error){
         return new InternalServerErrorException('Error en BD')
     }
@@ -31,7 +33,12 @@ export class NftService {
   }
 
   findAll() {
-    return this.nftRepositorio.find({});
+    return this.nftRepositorio.find({
+      relations: {
+        creaUsuario: true,
+        poseeUsuario: true
+      }
+    });
   }
 
   findOne(idNft: string) {
@@ -39,6 +46,10 @@ export class NftService {
       where: { 
         id: idNft
       },
+      relations: {
+        creaUsuario: true,
+        poseeUsuario: true
+      }
     });
   }
 

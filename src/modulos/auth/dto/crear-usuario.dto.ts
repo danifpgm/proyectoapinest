@@ -27,5 +27,5 @@ export class CrearUsuarioDto {
     @IsArray()
     @IsOptional()
     roles?: string[]
-
+    
 }

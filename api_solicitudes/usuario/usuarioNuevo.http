@@ -2,7 +2,7 @@ POST http://localhost:3000/api/usuarios/registrar
 Content-Type: application/json
 
 {
-    "correo": "correo4@correo.correo",
-    "passwd": "Passwd4",
-    "nombreCompleto": "usuario4"
+    "correo": "correo2@correo.correo",
+    "passwd": "Passwd2",
+    "nombreCompleto": "usuario2"
 }

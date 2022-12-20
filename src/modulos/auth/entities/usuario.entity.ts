@@ -1,13 +1,16 @@
 import { Broker } from "src/modulos/broker/entities/broker.entity";
 import { Cripto } from "src/modulos/cripto/entities/cripto.entity";
 import { Nft } from "src/modulos/nft/entities/nft.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('usuarios') 
 export class Usuario {
 
     @PrimaryGeneratedColumn('uuid')
     id:string;
+
+    // @PrimaryColumn()
+    // dni:string;
 
     @Column('text', { select: false })
     passwd: string;

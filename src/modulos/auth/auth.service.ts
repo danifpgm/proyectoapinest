@@ -70,6 +70,9 @@ export class AuthServicio {
       where: { 
         id: idUsuario
       },
+      relations: {
+        poseeNft: true
+      }
     });
   }
   
