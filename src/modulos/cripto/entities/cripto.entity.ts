@@ -18,7 +18,8 @@ export class Cripto {
 
     @ManyToMany(
        () => Usuario,
-       ( usuario ) => usuario.criptos
+       ( usuario ) => usuario.criptos,
+       {  onDelete: 'CASCADE' }
     )
     usuarios: Usuario[]
 }

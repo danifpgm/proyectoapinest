@@ -24,7 +24,11 @@ export class CriptoService {
   }
 
   findAll() {
-    return this.criptoRepositorio.find({});
+    return this.criptoRepositorio.find({
+      relations: {
+        usuarios: true
+      }
+    });
   }
 
   findOne(idCripto: string) {
@@ -32,6 +36,9 @@ export class CriptoService {
       where: { 
         id: idCripto
       },
+      relations: {
+        usuarios: true
+      }
     });
   }
 

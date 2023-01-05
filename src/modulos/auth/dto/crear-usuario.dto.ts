@@ -27,5 +27,8 @@ export class CrearUsuarioDto {
     @IsArray()
     @IsOptional()
     roles?: string[]
+
+    @IsString()
+    idCripto: string
     
 }

@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
+import { CriptoService } from '../cripto/cripto.service';
 
 
 @Injectable()
@@ -16,16 +17,19 @@ export class AuthServicio {
   constructor (
     @InjectRepository(Usuario)
     private readonly usuarioRepositorio: Repository<Usuario>,
-    private readonly jwtServicio: JwtService
+    private readonly jwtServicio: JwtService,
+    private readonly criptoServicio: CriptoService
   ) {}
 
   async crear(crearUsuarioDto: CrearUsuarioDto) {
     try {
-      const { passwd, ...userDatos } = crearUsuarioDto;
+      const { passwd, idCripto, ...userDatos } = crearUsuarioDto;
       const usuario = this.usuarioRepositorio.create({
         ...userDatos,
         passwd: bcrypt.hashSync( passwd, 10 )
       });
+      const cripto = await this.criptoServicio.findOne(idCripto);
+      usuario.criptos = [ cripto ]
       await this.usuarioRepositorio.save(usuario);
       delete usuario.passwd;
 
@@ -72,7 +76,8 @@ export class AuthServicio {
       },
       relations: {
         poseeNft: true,
-        brokers: true
+        brokers: true,
+        criptos: true
       }
     });
   }
@@ -82,7 +87,13 @@ export class AuthServicio {
   }
 
   async findAll() {
-    return this.usuarioRepositorio.find({});
+    return this.usuarioRepositorio.find({
+      relations: {
+        poseeNft: true,
+        brokers: true,
+        criptos: true
+      }
+    });
   }
 
   async remove(id: string) {
