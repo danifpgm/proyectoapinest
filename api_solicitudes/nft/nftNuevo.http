@@ -4,6 +4,7 @@ Content-Type: application/json
 {
     "nombre": "nft2",
     "img": "img2",
-    "idUsuarioCreador": "d343787c-f55a-45f7-a2cd-f8da08305a77",
-    "idUsuarioDueno": "55a3fde8-ccd6-4824-8a53-692422854cee"
+    "idUsuarioCreador": "84ac119a-63cb-4a80-9749-d3138fcd512b",
+    "fechaCreacion": "2023-01-01",
+    "idUsuarioDueno": "84ac119a-63cb-4a80-9749-d3138fcd512b"
 }

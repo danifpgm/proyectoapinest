@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { Usuario } from "src/modulos/auth/entities/usuario.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -12,12 +13,16 @@ export class Nft {
     @Column('text')
     img?: string;
 
+    @Column('text')
+    @IsOptional()
+    fechaCreacion?: string;
+
     @OneToOne(
         () => Usuario,
         (usuario) => usuario.creaNft
     )
     @JoinColumn()
-    creaUsuario?: Usuario
+    creadoPorUsuario?: Usuario
 
     @ManyToOne(
         () => Usuario,

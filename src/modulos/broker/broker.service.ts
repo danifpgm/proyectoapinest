@@ -4,17 +4,22 @@ import { UpdateBrokerDto } from './dto/update-broker.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Broker } from './entities/broker.entity';
 import { Repository } from 'typeorm';
+import { AuthServicio } from '../auth/auth.service';
 
 @Injectable()
 export class BrokerService {
   constructor (
     @InjectRepository(Broker)
-    private readonly brokerRepositorio: Repository<Broker>
+    private readonly brokerRepositorio: Repository<Broker>,
+    private readonly authServicio: AuthServicio
   ) {}
 
   async crear(CreateBrokerDto: CreateBrokerDto) {
     try {
-      const broker = CreateBrokerDto;
+      const { idUsuario, ...brokerDatos } = CreateBrokerDto;
+      const usuario = await this.authServicio.findOne(idUsuario);
+      const broker = this.brokerRepositorio.create({ ...brokerDatos })
+      broker.usuarios = [ usuario ]
       await this.brokerRepositorio.save(broker);
       return broker
     } catch (error) {
@@ -26,10 +31,10 @@ export class BrokerService {
     return this.brokerRepositorio.find({});
   }
 
-  findOne(idBroker: string) {
+  findOne(cifBroker: string) {
     return this.brokerRepositorio.findOne({
       where: { 
-        id: idBroker
+        cif: cifBroker
       },
     });
   }

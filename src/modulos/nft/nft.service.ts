@@ -14,13 +14,13 @@ export class NftService {
     private readonly authServicio: AuthServicio
   ){}
 
-  async create(createUsuarioDto: CreateNftDto) {
+  async create(crearNftDto: CreateNftDto) {
     try {
-      const { idUsuarioCreador, idUsuarioDueno, ...camposNft } = createUsuarioDto;
+      const { idUsuarioCreador, idUsuarioDueno, ...camposNft } = crearNftDto;
       const nft = this.nftRepositorio.create({...camposNft});
       const usuarioCreador = await this.authServicio.findOne(idUsuarioCreador);
       const usuarioDueno = await this.authServicio.findOne(idUsuarioDueno);
-      nft.creaUsuario = usuarioCreador;
+      nft.creadoPorUsuario = usuarioCreador;
       nft.poseeUsuario = usuarioDueno;
       
       await this.nftRepositorio.save(nft);
@@ -35,7 +35,7 @@ export class NftService {
   findAll() {
     return this.nftRepositorio.find({
       relations: {
-        creaUsuario: true,
+        creadoPorUsuario: true,
         poseeUsuario: true
       }
     });
@@ -47,7 +47,7 @@ export class NftService {
         id: idNft
       },
       relations: {
-        creaUsuario: true,
+        creadoPorUsuario: true,
         poseeUsuario: true
       }
     });

@@ -10,7 +10,7 @@ export class Usuario {
     id:string;
 
     // @PrimaryColumn()
-    // dni:string;
+    // dni: string;
 
     @Column('text', { select: false })
     passwd: string;
@@ -32,7 +32,7 @@ export class Usuario {
 
     @OneToOne(
     () => Nft,
-    (nft) => nft.creaUsuario,
+    (nft) => nft.creadoPorUsuario,
     { cascade: true, eager: true }
     )
     creaNft?: Nft;
@@ -53,7 +53,8 @@ export class Usuario {
 
     @ManyToMany(
         () => Broker,
-        ( broker ) => broker.usuarios
+        ( broker ) => broker.usuarios,
+        {  onDelete: 'CASCADE' }
      )
      brokers: Broker[]
 

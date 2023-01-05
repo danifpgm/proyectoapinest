@@ -21,9 +21,9 @@ export class AuthServicio {
 
   async crear(crearUsuarioDto: CrearUsuarioDto) {
     try {
-      const { passwd, ...userData } = crearUsuarioDto;
+      const { passwd, ...userDatos } = crearUsuarioDto;
       const usuario = this.usuarioRepositorio.create({
-        ...userData,
+        ...userDatos,
         passwd: bcrypt.hashSync( passwd, 10 )
       });
       await this.usuarioRepositorio.save(usuario);
@@ -71,7 +71,8 @@ export class AuthServicio {
         id: idUsuario
       },
       relations: {
-        poseeNft: true
+        poseeNft: true,
+        brokers: true
       }
     });
   }

@@ -2,5 +2,11 @@ POST http://localhost:3000/api/broker
 Content-Type: application/json
 
 {
-    "nombre": "broker"
+    "cif": "12345678A",
+    "nombre": "broker",
+    "url": "web@web.com",
+    "direccion": "direccion",
+    "correo_contacto": "correo@correo.coom",
+    "tlfn_contacto": 123456789,
+    "idUsuario": "84ac119a-63cb-4a80-9749-d3138fcd512b"
 }
