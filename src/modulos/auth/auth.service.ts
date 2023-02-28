@@ -31,10 +31,10 @@ export class AuthServicio {
       const cripto = await this.criptoServicio.findOne(idCripto);
       usuario.criptos = [ cripto ]
       await this.usuarioRepositorio.save(usuario);
-      delete usuario.passwd;
+      //delete usuario.passwd;
 
       return {
-        ...usuario, 
+        usuario: { ...usuario },
         token: this.getJwtToken({ correo: usuario.correo })
       }
       
@@ -46,21 +46,23 @@ export class AuthServicio {
   async login( loginUserDto: LoginUsuarioDto ){
     try {
       const { correo, passwd } = loginUserDto;
-      const usuario = await this.usuarioRepositorio.findOne({ 
-        where: { correo }
-        //Con esto no funciona
-        //select: { correo: true, passwd: true }
-       });
+      const usuario = await this.usuarioRepositorio
+        .createQueryBuilder("usuarios")
+        .select("usuarios.id")
+        .addSelect("usuarios.passwd")
+        .where( "usuarios.correo = :correo", { correo: correo})
+        .getOne();
+       console.log(usuario);
 
       if ( !usuario ) 
         throw new UnauthorizedException ('Credenciales no válidas (email)');
 
       //Con esta comprobación tampoco funciona
-      // if (!bcrypt.compareSync( passwd, usuario.passwd ))
-      //   throw new UnauthorizedException('Credenciales no válidas (email)')
+      if (!bcrypt.compareSync( passwd, usuario.passwd ))
+        throw new UnauthorizedException('Credenciales no válidas (email)')
       
       return {
-        ...usuario, 
+        usuario: { ...usuario },
         token: this.getJwtToken({ correo: usuario.correo })
       }
       

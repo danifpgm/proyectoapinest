@@ -2,8 +2,8 @@ POST http://localhost:3000/api/usuarios/registrar
 Content-Type: application/json
 
 {
-    "correo": "correo5@correo.correo",
-    "passwd": "Passwd5",
-    "nombreCompleto": "usuario5",
-    "idCripto": "be45d74b-5ffe-4b28-8bbd-96f051fa0385"
+    "correo": "correo2@correo.correo",
+    "passwd": "Passwd2",
+    "nombreCompleto": "usuario2",
+    "idCripto": "457e2ca1-dc02-463b-b8d8-d15777991a65"
 }
