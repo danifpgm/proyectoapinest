@@ -23,6 +23,7 @@ export class AuthServicio {
 
   async crear(crearUsuarioDto: CrearUsuarioDto) {
     try {
+      console.log("Insertando usuario: ",crearUsuarioDto);
       const { passwd, idCripto, ...userDatos } = crearUsuarioDto;
       const usuario = this.usuarioRepositorio.create({
         ...userDatos,
@@ -62,7 +63,7 @@ export class AuthServicio {
         throw new UnauthorizedException('Credenciales no válidas (email)')
       
       return {
-        usuario: { ...usuario },
+        usuario,
         token: this.getJwtToken({ correo: usuario.correo })
       }
       

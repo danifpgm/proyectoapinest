@@ -1,7 +1,7 @@
 import { Broker } from "src/modulos/broker/entities/broker.entity";
 import { Cripto } from "src/modulos/cripto/entities/cripto.entity";
 import { Nft } from "src/modulos/nft/entities/nft.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('usuarios') 
 export class Usuario {
@@ -58,4 +58,13 @@ export class Usuario {
      )
      brokers: Broker[]
 
+     @BeforeInsert()
+    checkFieldsBeforeInsert(){
+        this.correo = this.correo.toLowerCase().trim();
+    }
+
+    @BeforeUpdate()
+    checkFieldsBeforeUpdate(){
+        this.checkFieldsBeforeInsert()
+    }
 }
