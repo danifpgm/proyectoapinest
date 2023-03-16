@@ -5,5 +5,6 @@ Content-Type: application/json
     "correo": "correo2@correo.correo",
     "passwd": "Passwd2",
     "nombreCompleto": "usuario2",
+    "rol": "administrador",
     "idCripto": "457e2ca1-dc02-463b-b8d8-d15777991a65"
 }

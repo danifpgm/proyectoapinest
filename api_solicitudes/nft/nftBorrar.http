@@ -1,2 +1,5 @@
 DELETE http://localhost:3000/api/nft/2e05b29e-1c68-44dc-9495-3b2163a8d8eb
 Content-Type: application/json
+{
+"id": "89d1f36b-8e99-424a-a5e5-b38b3b6fe851"
+}
