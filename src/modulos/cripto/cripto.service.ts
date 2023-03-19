@@ -49,7 +49,7 @@ export class CriptoService {
   async remove(id: string) {
     const cripto = await this.findOne(id);
     await this.criptoRepositorio.remove(cripto);
-    return `El nft ${cripto.nombre} ha sido borrado`;
+    return `La criptomoneda ${cripto.nombre} ha sido borrado`;
   }
 
   private manejarExcepcionesBD (error: any): never{
