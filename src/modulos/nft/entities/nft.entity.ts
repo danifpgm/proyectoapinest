@@ -20,11 +20,16 @@ export class Nft {
     @IsOptional()
     fechaCreacion?: string;
 
-    @OneToOne(
+    // @OneToOne(
+    //     () => Usuario,
+    //     (usuario) => usuario.creaNft
+    // )
+    // @JoinColumn()
+    @ManyToOne(
         () => Usuario,
-        (usuario) => usuario.creaNft
-    )
-    @JoinColumn()
+        ( usuario ) => usuario.creaNft,
+        { onDelete: 'CASCADE' }
+     )
     creadoPorUsuario?: Usuario
 
     @ManyToOne(

@@ -2,10 +2,10 @@ POST http://localhost:3000/api/nft
 Content-Type: application/json
 
 {
-    "nombre": "nft2",
-    "img": "img2",
+    "nombre": "nft3",
+    "img": "img3",
     "precio": 5000,
-    "idUsuarioCreador": "46a812bf-3e50-4e7d-9cae-66d58d4e61ad",
+    "idUsuarioCreador": "6ad5e6ca-cf74-4434-a211-caf210487561",
     "fechaCreacion": "2023-01-01",
-    "idUsuarioDueno": "84ac119a-63cb-4a80-9749-d3138fcd512b"
+    "idUsuarioDueno": "6ad5e6ca-cf74-4434-a211-caf210487561"
 }

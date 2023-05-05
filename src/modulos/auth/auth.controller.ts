@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, Patch } from '@nestjs/common';
 import { AuthServicio } from './auth.service';
 import { CrearUsuarioDto } from './dto/crear-usuario.dto';
 import { LoginUsuarioDto } from './dto/login-usuario.dto';
+import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('usuarios')
@@ -35,6 +36,11 @@ export class AuthController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.authServicio.findOne(id);
+  }
+
+  @Patch(':id')
+  actualizar(@Param('id') id: string, @Body() actualizarUsuarioDto: ActualizarUsuarioDto) {
+    return this.authServicio.actualizar(id, actualizarUsuarioDto);
   }
 
   @Delete(':id')

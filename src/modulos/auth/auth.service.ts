@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CrearUsuarioDto } from './dto/crear-usuario.dto';
@@ -73,6 +73,14 @@ export class AuthServicio {
     }
   }
 
+  async actualizar(id: string, actualizarUsuarioDto: ActualizarUsuarioDto) {
+    const respuesta = await this.usuarioRepositorio.update(id, actualizarUsuarioDto);
+    if (respuesta.affected === 0) {
+      throw new NotFoundException(`Usuario con ID: ${id}"no encontrado`);
+    }
+    return { message: `Usuario con ID: ${id} actualizado correctamente` };
+  }
+
   findOne(idUsuario: string) {
     return this.usuarioRepositorio.findOne({
       where: { 
@@ -84,10 +92,6 @@ export class AuthServicio {
         criptos: true
       }
     });
-  }
-  
-  update(id: number, actualizarUsuarioDto: ActualizarUsuarioDto) {
-    return `This action updates a #${id} broker`;
   }
 
   async findAll() {

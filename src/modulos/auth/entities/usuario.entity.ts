@@ -35,12 +35,17 @@ export class Usuario {
     })
     rol: string
 
-    @OneToOne(
-    () => Nft,
-    (nft) => nft.creadoPorUsuario,
-    { cascade: true, eager: true }
+    // @OneToOne(
+    // () => Nft,
+    // (nft) => nft.creadoPorUsuario,
+    // { cascade: true, eager: true }
+    // )
+    @OneToMany(
+        () => Nft,
+        (nft) => nft.creadoPorUsuario,
+        { cascade: true, eager: true }
     )
-    creaNft?: Nft;
+    creaNft?: Nft[];
     
     @OneToMany(
         () => Nft,
