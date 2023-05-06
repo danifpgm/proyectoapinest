@@ -32,8 +32,8 @@ export class CrearUsuarioDto {
     @IsOptional()
     rol?: string
 
-    @IsString()
-    @IsOptional()
-    idCripto: string
+    // @IsString()
+    // @IsOptional()
+    // idCripto: string
     
 }

@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/usuario-posee-cripto
+Content-Type: application/json
+
+{
+    "usuario": "10ddd714-d489-4db7-91d4-644125ef0baf",
+    "criptomoneda": "457e2ca1-dc02-463b-b8d8-d15777991a65",
+    "cantidad": 100
+}

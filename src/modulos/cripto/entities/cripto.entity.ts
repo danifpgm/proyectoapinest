@@ -1,5 +1,6 @@
 import { Usuario } from "src/modulos/auth/entities/usuario.entity";
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { usuarioPoseeCripto } from "src/modulos/usuario-posee-cripto/entities/usuarioPoseeCripto";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('criptomonedas')
 export class Cripto {
@@ -16,10 +17,10 @@ export class Cripto {
     })
     precio: number;
 
-    @ManyToMany(
-       () => Usuario,
-       ( usuario ) => usuario.criptos,
+    @OneToMany(
+       () => usuarioPoseeCripto,
+       ( usuarioPoseeCripto ) => usuarioPoseeCripto.criptomoneda,
        {  onDelete: 'CASCADE' }
     )
-    usuarios: Usuario[]
+    usuarios: usuarioPoseeCripto[]
 }

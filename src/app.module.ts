@@ -9,7 +9,7 @@ import { AuthModule } from './modulos/auth/auth.module';
 import { BrokerModule } from './modulos/broker/broker.module';
 import { CriptoModule } from './modulos/cripto/cripto.module';
 import { NftModule } from './modulos/nft/nft.module';
-import { clear } from 'console';
+import { UsuarioPoseeCriptoModule } from './modulos/usuario-posee-cripto/usuarioPoseeCripto.module';
 
 @Module({
   imports: [
@@ -29,7 +29,8 @@ import { clear } from 'console';
     AuthModule,
     BrokerModule,
     CriptoModule,
-    NftModule
+    NftModule,
+    UsuarioPoseeCriptoModule
   ],
   controllers: [AppController],
   providers: [AppService],

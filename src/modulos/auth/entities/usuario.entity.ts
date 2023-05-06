@@ -1,7 +1,7 @@
 import { Broker } from "src/modulos/broker/entities/broker.entity";
-import { Cripto } from "src/modulos/cripto/entities/cripto.entity";
 import { Nft } from "src/modulos/nft/entities/nft.entity";
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { usuarioPoseeCripto } from "src/modulos/usuario-posee-cripto/entities/usuarioPoseeCripto";
+import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('usuarios') 
 export class Usuario {
@@ -40,6 +40,7 @@ export class Usuario {
     // (nft) => nft.creadoPorUsuario,
     // { cascade: true, eager: true }
     // )
+    
     @OneToMany(
         () => Nft,
         (nft) => nft.creadoPorUsuario,
@@ -54,12 +55,20 @@ export class Usuario {
     )
     poseeNft?: Nft[];
 
-    @ManyToMany(
-    () => Cripto,
-    ( cripto ) => cripto.usuarios
+    // @ManyToMany(
+    // () => Cripto,
+    // ( cripto ) => cripto.usuarios,
+    // {  onDelete: 'CASCADE' }
+    // )
+    // @JoinTable({ name: 'usuario_posee_cripto' })
+    // criptos: Cripto[]
+
+    @OneToMany(
+        () => usuarioPoseeCripto,
+        (usuarioPoseeCripto) => usuarioPoseeCripto.usuario,
+        { cascade: true, eager: true }
     )
-    @JoinTable({ name: 'usuario_posee_cripto' })
-    criptos: Cripto[]
+    criptos: usuarioPoseeCripto[]
 
     @ManyToMany(
         () => Broker,
